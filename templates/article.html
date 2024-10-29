@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ article['title'] }} - Recommendations</title>
+    <style>
+        /* Basic styling; enhance or move to a separate CSS file as needed */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .metadata {
+            margin-bottom: 20px;
+        }
+        .recommendations {
+            list-style-type: none;
+            padding: 0;
+        }
+        .recommendation-item {
+            margin-bottom: 10px;
+        }
+        .recommendation-link {
+            text-decoration: none;
+            color: #333;
+        }
+        .recommendation-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ article['title'] }}</h1>
+        <div class="metadata">
+            <p><strong>Tags:</strong> {{ article['tags'] }}</p>
+            <p><strong>URL:</strong> <a href="{{ article['url'] }}" target="_blank">{{ article['url'] }}</a></p>
+            <p><strong>Description:</strong> {{ article['description'] }}</p>
+        </div>
+
+        <h2>Recommended Articles</h2>
+        <ul class="recommendations">
+            {% for rec in recommendations %}
+                <li class="recommendation-item">
+                    <a class="recommendation-link" href="{{ url_for('article_recommendations', article_id=rec['article id']) }}">
+                        {{ rec }} - Similarity: {{ rec['similarity_score'] }}
+                    </a>
+                    <p>{{ rec['description'] }}</p>
+                </li>
+            {% else %}
+                <li>No recommendations available for this article.</li>
+            {% endfor %}
+        </ul>
+
+        <p><a href="{{ url_for('home') }}">Back to Home</a></p>
+    </div>
+</body>
+</html>
