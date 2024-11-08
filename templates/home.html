@@ -3,51 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Article Recommendations Home</title>
-    <style>
-        /* Basic styling; you can enhance this or move it to a separate CSS file */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .search-bar {
-            margin-bottom: 20px;
-        }
-        .search-input {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Choose an Article</h1>
-    <div class="search-bar">
-        <input type="text" class="search-input" id="articleSearch" placeholder="Type to search articles...">
-    </div>
-    <ul class="article-list" id="articleList">
-        {% for article in articles %}
-            <li class="article-item" data-title="{{ article['title'] }}">
-                <a class="article-link" href="{{ url_for('article_recommendations', article_id=article['uuid']) }}">
-                    {{ article['title'] }}
-                </a>
-            </li>
-        {% else %}
-            <li>No articles available.</li>
-        {% endfor %}
-    </ul>
-    <script>
-        document.getElementById('articleSearch').addEventListener('input', function() {
-            var filter = this.value.toLowerCase();
-            var articles = document.querySelectorAll('.article-item');
-            articles.forEach(function(article) {
-                var title = article.getAttribute('data-title').toLowerCase();
-                if (title.includes(filter)) {
-                    article.style.display = '';
-                } else {
-                    article.style.display = 'none';
-                }
+    <div class="container">
+        <div class="header">
+            <h1>Could you be a news editor?</h1>
+            <p>Choose an Article</p>
+        </div>
+        <div class="search-bar">
+            <input type="text" class="search-input" id="articleSearch" placeholder="Type to search articles...">
+        </div>
+        <ul class="article-list" id="articleList">
+            {% for article in articles %}
+                <li class="article-item" data-title="{{ article['title'] }}">
+                    <a class="article-link" href="{{ url_for('article_recommendations', article_id=article['uuid']) }}">
+                        {{ article['title'] }}
+                    </a>
+                </li>
+            {% else %}
+                <li>No articles available.</li>
+            {% endfor %}
+        </ul>
+        <script>
+            document.getElementById('articleSearch').addEventListener('input', function() {
+                var filter = this.value.toLowerCase();
+                var articles = document.querySelectorAll('.article-item');
+                articles.forEach(function(article) {
+                    var title = article.getAttribute('data-title').toLowerCase();
+                    if (title.includes(filter)) {
+                        article.style.display = '';
+                    } else {
+                        article.style.display = 'none';
+                    }
+                });
             });
-        });
-    </script>
+        </script>
+    </div>
 </body>
 </html>
