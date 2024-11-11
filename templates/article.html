@@ -14,7 +14,7 @@
         <h2>Main article:</h2>
 
         <div class="main-article-item">
-            <a href="https://tv2.no/a/{{ article.uuid }}" class="external-link-button">Visit original article</a>
+            <a href="https://tv2.no/a/{{ article.uuid }}" class="external-link-button">Visit original article on TV 2</a>
             <div class="main-article-content">
                 <h1 class="main-article-title">{{ article.title }}</h1>
                 <p class="article-byline">{{ article.byline | join(', ') }}</p>
@@ -30,17 +30,20 @@
 
         <div class="recommendations-section">
             <h2>Recommendations for Related Articles</h2>
+            <p><i>Articles that were also picked by editors are highlighted in green</i></p>
             <ul class="recommendations">
                 {% for rec in recommendations %}
-                <li class="recommendation-item">
+                <li class="recommendation-item {% if rec.uuid in article.related_articles %}highlighted-recommendation{% else %}normal-recommendation{% endif %}">
                     <a href="{{ url_for('recommendation', article_id=article.uuid, recommendation_id=rec.uuid) }}" style="display: block; height: 100%; text-decoration: none;">
                         <img src="{{ rec.image_url or 'https://via.placeholder.com/150' }}" alt="No image">
                         <div class="recommendation-content">
                             <span class="recommendation-title">
                                 {{ rec.title }}
                             </span>
-                            <p class="recommendation-description">{{ rec.byline | join(', ') }}<br>{{rec.creation_date}}<br>KNN Similarity: {{ rec.recommendation_similarity }}%</p>
+                            <p class="recommendation-description">{{ rec.byline | join(', ') }}<br>{{rec.creation_date}}</p>
+                            <p>KNN Similarity: {{ rec.recommendation_similarity }}%</p>
                             <p class="recommendation-explanation" style="font-size: 15px;">{{ rec.recommendation_explanation }}</p>
+                            <p>LLM rating: {{ rec.recommendation_llm_rating }}/10</p>
                         </div>
                     </a>
                 </li>

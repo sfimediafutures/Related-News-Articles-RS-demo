@@ -144,6 +144,13 @@ body {
     font-style: italic;
 }
 
+.highlighted-recommendation {
+    background-color: #d4edda; /* Light green */
+}
+.normal-recommendation {
+    background-color: #ffffff; /* Light red */
+}
+
 /* Buttons and Links */
 .back-link,
 .external-link-button,

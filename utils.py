@@ -37,6 +37,7 @@ class Article:
         # Optional values (only present in big dataset)
         recommendation_explanation='',
         recommendation_similarity='',
+        recommendation_llm_rating='',
     ):
         self.uuid = uuid
         self.byline = byline
@@ -65,6 +66,7 @@ class Article:
         self.map_at_5 = map_at_5
         self.recommendation_explanation = recommendation_explanation
         self.recommendation_similarity = recommendation_similarity
+        self.recommendation_llm_rating = recommendation_llm_rating
 
 class ArticleRecommendationFacade:
     def __init__(self, testset_articles: str, big_articles: str):
@@ -155,8 +157,10 @@ class ArticleRecommendationFacade:
                         article_data = {}
                     else:
                         article_data = recommended_article_row.iloc[0].to_dict()
+                    # Get the specific recommendation specifically for the recommendation
                     for result in original_article_row.iloc[0]['recommendations results']:
                         if result[2] == article_id:
+                            recommendation_llm_rating = result[0]
                             recommendation_similarity = int(round(result[3], 2)*100) # turn into percentage
                             recommendation_explanation = result[5]
                     # This is essentially similar to the get_article method, but without full_text_embeddings, recommendations_results, ground_truth, recall_at_5, precision_at_5, map_at_5
@@ -181,6 +185,7 @@ class ArticleRecommendationFacade:
                     all_text=article_data.get('all_text', ''),
                     recommendation_explanation=recommendation_explanation,
                     recommendation_similarity=recommendation_similarity,
+                    recommendation_llm_rating=recommendation_llm_rating,
                         )
                     results.append(article_object)
 
