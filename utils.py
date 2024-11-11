@@ -105,6 +105,7 @@ class ArticleRecommendationFacade:
             article_data = {}
         else:
             article_data = article_row.iloc[0].to_dict()
+
         article_object = Article(
             uuid=article_data.get('uuid', article_id),
             byline=article_data.get('byline', []),

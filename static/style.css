@@ -114,6 +114,19 @@ body {
     height: auto;
 }
 
+.missed-item {
+    flex: 0 0 auto;
+    width: 200px;
+    background-color: #ffccc9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+}
+
 .recommendation-content {
     padding: 15px;
 }
@@ -150,6 +163,7 @@ body {
 .normal-recommendation {
     background-color: #ffffff; /* Light red */
 }
+
 
 /* Buttons and Links */
 .back-link,

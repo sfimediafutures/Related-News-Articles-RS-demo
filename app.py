@@ -17,7 +17,15 @@ def article_recommendations(article_id):
     # Use the facade to get article details and recommendations
     result = facade.get_article(article_id)
     recommendations = facade.get_recommendations(article_id)
-    return render_template('article.html', article=result, recommendations=recommendations)
+
+    # Compute missed recommendations
+    related_articles = set(result.related_articles)
+    recommended_articles = set(rec.uuid for rec in recommendations)
+    missed_article_ids = related_articles - recommended_articles
+    missed_articles = [facade.get_article(article_id) for article_id in missed_article_ids]
+    # print(f'Missed articles: {missed_articles}')
+
+    return render_template('article.html', article=result, recommendations=recommendations, missed_articles=missed_articles)
 
 @app.route('/recommendation/<string:article_id>/<string:recommendation_id>')
 def recommendation(article_id, recommendation_id):
