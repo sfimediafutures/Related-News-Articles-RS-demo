@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Article Recommendations Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
     <div class="container">
         <div class="header">
-            <a href="/"  class="no-underline-link">
-            <img src="https://mediafutures.no/wp-content/uploads/tv2_scaled.png" alt="TV 2 Logo" class="tv2-logo">
-            <h1>LLMs as Journalists</h1>
-            <p>Choose an Article</p>
+            <a href="/" class="no-underline-link">
+                <img src="https://mediafutures.no/wp-content/uploads/tv2_scaled.png" alt="TV 2 Logo" class="tv2-logo">
+                <h1>LLMs as Journalists</h1>
+                <p>Choose an Article</p>
             </a>
         </div>
         <div class="search-bar">
@@ -19,23 +21,23 @@
         </div>
         <ul class="article-list" id="articleList">
             {% for article in articles %}
-                <li class="article-item" data-title="{{ article['title'] }}">
-                    <a class="article-link" href="{{ url_for('article_recommendations', article_id=article['uuid']) }}">
-                        <b>{{ article['section']}}</b>: {{ article['title'] }}
-                    </a>
-                    <!-- {% for tag in article.tags %}
+            <li class="article-item" data-title="{{ article['title'] }}">
+                <a class="article-link" href="{{ url_for('article_recommendations', article_id=article['uuid']) }}">
+                    <b>{{ article['section']}}</b>: {{ article['title'] }}
+                </a>
+                <!-- {% for tag in article.tags %}
                         <span class="tag">{{ tag }}</span>
                     {% endfor %} -->
-                </li>
+            </li>
             {% else %}
-                <li>No articles available.</li>
+            <li>No articles available.</li>
             {% endfor %}
         </ul>
         <script>
-            document.getElementById('articleSearch').addEventListener('input', function() {
+            document.getElementById('articleSearch').addEventListener('input', function () {
                 var filter = this.value.toLowerCase();
                 var articles = document.querySelectorAll('.article-item');
-                articles.forEach(function(article) {
+                articles.forEach(function (article) {
                     var title = article.getAttribute('data-title').toLowerCase();
                     if (title.includes(filter)) {
                         article.style.display = '';
@@ -47,4 +49,5 @@
         </script>
     </div>
 </body>
+
 </html>

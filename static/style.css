@@ -66,6 +66,7 @@ body {
 .article-byline {
     font-size: 18px;
 }
+
 .article-metadata {
     color: #888;
 }
@@ -158,10 +159,13 @@ body {
 }
 
 .highlighted-recommendation {
-    background-color: #d4edda; /* Light green */
+    background-color: #d4edda;
+    /* Light green */
 }
+
 .normal-recommendation {
-    background-color: #ffffff; /* Light red */
+    background-color: #ffffff;
+    /* Light red */
 }
 
 
@@ -252,5 +256,6 @@ body {
 
 .no-underline-link {
     text-decoration: none;
-    color: inherit; /* or specify a color like #000 for black */
+    color: inherit;
+    /* or specify a color like #000 for black */
 }
