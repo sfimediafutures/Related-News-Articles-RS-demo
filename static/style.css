@@ -81,7 +81,7 @@ body {
 }
 
 /* Recommendations */
-.recommendations-section h2 {
+.small-articles-section h2 {
     font-size: 24px;
     font-weight: bold;
     margin-top: 40px;
@@ -89,7 +89,7 @@ body {
     padding-bottom: 10px;
 }
 
-.recommendations {
+.small-articles {
     display: flex;
     overflow-x: auto;
     gap: 20px;

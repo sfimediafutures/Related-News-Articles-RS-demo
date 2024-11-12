@@ -99,12 +99,20 @@ class ArticleRecommendationFacade:
         if article_id in self.article_cache:
             return self.article_cache[article_id]
 
-        # Search for article in the DataFrame
-        article_row = self.testset_articles_df[self.testset_articles_df['uuid'] == article_id]
-        if article_row.empty:
-            article_data = {}
+        # Search for article in both DataFrames
+        testset_article_row = self.testset_articles_df[self.testset_articles_df['uuid'] == article_id]
+        big_article_row = self.big_articles_df[self.big_articles_df['uuid'] == article_id]
+
+        # Initialize article_data with big_articles data if available
+        if not big_article_row.empty:
+            article_data = big_article_row.iloc[0].to_dict()
         else:
-            article_data = article_row.iloc[0].to_dict()
+            article_data = {}
+
+        # Overwrite with testset_articles data if available
+        if not testset_article_row.empty:
+            testset_article_data = testset_article_row.iloc[0].to_dict()
+            article_data.update(testset_article_data)
 
         article_object = Article(
             uuid=article_data.get('uuid', article_id),

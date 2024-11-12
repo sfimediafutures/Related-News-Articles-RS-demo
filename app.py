@@ -19,7 +19,7 @@ def article_recommendations(article_id):
     recommendations = facade.get_recommendations(article_id)
 
     # Compute missed recommendations
-    related_articles = set(result.related_articles)
+    related_articles = set(result.cleaned_related_articles)
     recommended_articles = set(rec.uuid for rec in recommendations)
     missed_article_ids = related_articles - recommended_articles
     missed_articles = [facade.get_article(article_id) for article_id in missed_article_ids]
