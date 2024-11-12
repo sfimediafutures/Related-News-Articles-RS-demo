@@ -8,7 +8,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Could you be a news editor?</h1>
+            <img src="https://mediafutures.no/wp-content/uploads/tv2_scaled.png" alt="TV 2 Logo" class="tv2-logo">
+            <h1>LLMs as journalists</h1>
             <p>Choose an Article</p>
         </div>
         <div class="search-bar">
@@ -18,8 +19,11 @@
             {% for article in articles %}
                 <li class="article-item" data-title="{{ article['title'] }}">
                     <a class="article-link" href="{{ url_for('article_recommendations', article_id=article['uuid']) }}">
-                        {{ article['title'] }}
+                        <b>{{ article['section']}}</b>: {{ article['title'] }}
                     </a>
+                    <!-- {% for tag in article.tags %}
+                        <span class="tag">{{ tag }}</span>
+                    {% endfor %} -->
                 </li>
             {% else %}
                 <li>No articles available.</li>

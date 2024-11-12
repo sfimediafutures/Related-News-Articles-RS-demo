@@ -8,8 +8,15 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    # Use the facade to get the list of articles
-    articles_list = facade.testset_articles_df[['uuid', 'title']].to_dict('records')
+    # Use the facade to get the list of articles with specific uuids
+    allowed_uuids = [
+        'TV2-14523388', 'TV2-15289934', 'TV2-14768827',
+        'TV2-15394074', 'TV2-14497584', 'TV2-14514338',
+        'TV2-14594092', 'TV2-14504284'
+    ]
+    articles_list = facade.testset_articles_df[
+        facade.testset_articles_df['uuid'].isin(allowed_uuids)
+    ][['uuid', 'title', 'section']].to_dict('records')
     return render_template('home.html', articles=articles_list)
 
 @app.route('/article/<string:article_id>')

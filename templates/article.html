@@ -8,7 +8,9 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Could you be a news editor?</h1>
+            <img src="https://mediafutures.no/wp-content/uploads/tv2_scaled.png" alt="TV 2 Logo" class="tv2-logo">
+
+            <h1>LLMs as journalists</h1>
             <p>Tool for journalists and editors - Helping them find related articles to their story</p>
         </div>
         <h2>Main article:</h2>
@@ -29,7 +31,7 @@
         </div>
 
         <div class="small-articles-section">
-            <h2>AI Recommendations for Related Articles</h2>
+            <h2>AI Recommendations for Related Articles:</h2>
             <p><i>Articles that were also picked by editors are highlighted in green</i></p>
             <ul class="small-articles">
                 {% for rec in recommendations %}

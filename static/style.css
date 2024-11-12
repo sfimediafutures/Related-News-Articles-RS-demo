@@ -116,7 +116,7 @@ body {
 
 .missed-item {
     flex: 0 0 auto;
-    width: 200px;
+    /* width: 200px; */
     background-color: #ffccc9;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -239,4 +239,13 @@ body {
     color: #002e84;
     margin-top: 10px;
     font-style: italic;
+}
+
+.tv2-logo {
+    width: 150px;
+    height: auto;
+    margin-top: 20px;
+    display: inline-block;
+    margin-left: 0;
+    vertical-align: middle;
 }
