@@ -249,3 +249,8 @@ body {
     margin-left: 0;
     vertical-align: middle;
 }
+
+.no-underline-link {
+    text-decoration: none;
+    color: inherit; /* or specify a color like #000 for black */
+}
