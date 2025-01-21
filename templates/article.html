@@ -42,24 +42,19 @@
             <p><i>Articles that were also picked by editors are highlighted in green</i></p>
             <ul class="small-articles">
                 {% for rec in recommendations %}
-                <li
-                    class="recommendation-item {% if rec.uuid in article.related_articles %}highlighted-recommendation{% else %}normal-recommendation{% endif %}">
-                    <a href="{{ url_for('recommendation', article_id=article.uuid, recommendation_id=rec.uuid) }}"
-                        style="display: block; height: 100%; text-decoration: none;">
+                <li class="recommendation-item {% if rec.uuid in article.related_articles %}highlighted-recommendation{% else %}normal-recommendation{% endif %}">
+                    <a href="{{ url_for('recommendation', article_id=article.uuid, recommendation_id=rec.uuid) }}" style="display: block; height: 100%; text-decoration: none;">
                         <img src="{{ rec.image_url or 'https://via.placeholder.com/150' }}" alt="No image">
                         <div class="recommendation-content">
                             <span class="recommendation-title">
                                 {{ rec.title }}
                             </span>
-                            <p class="recommendation-description">{{ rec.byline | join(', ') }}<br>{{rec.creation_date}}
-                            </p>
+                            <p class="recommendation-description">{{ rec.byline | join(', ') }}<br>{{ rec.creation_date }}</p>
                             <p>KNN Similarity: {{ rec.recommendation_similarity }}%</p>
                             <p>LLM rating: {{ rec.recommendation_llm_rating }}/10</p>
-                            <p class="recommendation-explanation" style="font-size: 15px;">{{
-                                rec.recommendation_explanation }}</p>
+                            <p class="recommendation-explanation" style="font-size: 15px;">{{ rec.recommendation_explanation }}</p>
                         </div>
                     </a>
-                </li>
                 {% else %}
                 <li>No recommendations available for this article.</li>
                 {% endfor %}
