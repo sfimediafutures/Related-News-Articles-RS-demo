@@ -1,12 +1,15 @@
 from flask import Flask, render_template, request, jsonify, session
 from utils import ArticleRecommendationFacade
 import uuid
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 # Initialize the facade with the provided paths
 facade = ArticleRecommendationFacade('data/combined_articles_recommendations.csv', 'data/articles_big_dataset.csv')
 
 app = Flask(__name__)
-app.secret_key = '***REMOVED***'
+app.secret_key = os.getenv('EXPERT_STUDY_SECRET_KEY', 'default')
 
 @app.before_request
 def assign_session_id():
